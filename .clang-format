@@ -1,0 +1,50 @@
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+# See full description here: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: WebKit
+IndentWidth: 4
+---
+Language: Cpp
+# Force pointers to the type for C++.
+DerivePointerAlignment: true
+PointerAlignment: Left
+ColumnLimit: 120
+AlignAfterOpenBracket: Align
+#AlignConsecutiveAssignments: true
+AlignConsecutiveBitFields: true
+#AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Left
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+BreakInheritanceList: BeforeComma
+
+
+AccessModifierOffset: -2
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterEnum: true
+  AfterStruct: true
+  AfterClass: true
+  AfterUnion: true
+  AfterCaseLabel: false
+  SplitEmptyFunction: false
+  BeforeElse: false
+  AfterFunction: true
+  AfterControlStatement: MultiLine
+
+# Function format
+IndentWrappedFunctionNames: false
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+AllowShortLambdasOnASingleLine: Inline
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowAllArgumentsOnNextLine: true
+
+MaxEmptyLinesToKeep: 2
+
+# Comment styles
+FixNamespaceComments: true
+SpacesBeforeTrailingComments: 4
+SpacesInContainerLiterals: true
+SpacesInParentheses: true
