@@ -57,6 +57,8 @@ add_executable(${PROJECT_NAME}
         IODevice/IDevice.h
         IODevice/SerialDevice.cpp
         IODevice/SerialDevice.h
+        CommunicationManager/CommunicationManager.cpp
+        CommunicationManager/CommunicationManager.h
         )
 
 #---Find pckg

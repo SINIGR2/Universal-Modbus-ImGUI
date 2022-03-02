@@ -85,8 +85,11 @@ SerialDevice::write(char* buffer, size_t size)
 }
 
 ssize_t
-SerialDevice::setCommunicationParams()
+SerialDevice::setCommunicationParams(Port port, BaudRate baudRate)
 {
+    m_port = port;
+    m_baudRate = baudRate;
+
     return sio_ioctl(m_port, m_baudRate, P_NONE | BIT_8 | STOP_1);
 }
 
