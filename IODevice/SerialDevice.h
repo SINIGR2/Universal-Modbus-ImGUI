@@ -46,7 +46,7 @@ public:
     ssize_t write(char byte) override;
     ssize_t write(char* buffer, size_t size) override;
 
-    ssize_t setCommunicationParams();
+    ssize_t setCommunicationParams(Port port, BaudRate baudRate);
 
     Port getPortNumber() const;
     BaudRate getPortBaudRate() const;
