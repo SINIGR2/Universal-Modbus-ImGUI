@@ -25,6 +25,8 @@ include_directories(pcomm/Include)
 include_directories(pcomm/Lib/x86)
 include_directories(pcomm/Lib/x64)
 
+include_directories(Support/Fonts)
+
 #---GLFW
 add_subdirectory(glfw)
 
@@ -59,7 +61,14 @@ add_executable(${PROJECT_NAME}
         IODevice/SerialDevice.h
         CommunicationManager/CommunicationManager.cpp
         CommunicationManager/CommunicationManager.h
-        )
+        View/StartUpWindow/StartUpWindow.cpp
+        View/StartUpWindow/StartUpWindow.h
+        View/Logger/Logger.cpp
+        View/Logger/Logger.h
+        View/ExchangeWindow/ExchangeWindow.cpp
+        View/ExchangeWindow/ExchangeWindow.h
+        View/BackgroundWindow/BackgroundWindow.cpp
+        View/BackgroundWindow/BackgroundWindow.h View/GuiBuilder.cpp View/GuiBuilder.h)
 
 #---Find pckg
 find_package(OpenGL)
