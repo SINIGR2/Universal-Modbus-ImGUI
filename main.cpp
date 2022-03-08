@@ -4,10 +4,7 @@ int
 main(int, char**)
 {
     GuiBuilder builder;
-
-    while(true){
-        builder.loop();
-    }
+    builder.build();
 
     return 0;
 }

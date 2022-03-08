@@ -25,7 +25,9 @@ include_directories(pcomm/Include)
 include_directories(pcomm/Lib/x86)
 include_directories(pcomm/Lib/x64)
 
+include_directories(View)
 include_directories(Support/Fonts)
+
 
 #---GLFW
 add_subdirectory(glfw)
@@ -68,7 +70,9 @@ add_executable(${PROJECT_NAME}
         View/ExchangeWindow/ExchangeWindow.cpp
         View/ExchangeWindow/ExchangeWindow.h
         View/BackgroundWindow/BackgroundWindow.cpp
-        View/BackgroundWindow/BackgroundWindow.h View/GuiBuilder.cpp View/GuiBuilder.h)
+        View/BackgroundWindow/BackgroundWindow.h
+        View/GuiBuilder.cpp
+        View/GuiBuilder.h)
 
 #---Find pckg
 find_package(OpenGL)
