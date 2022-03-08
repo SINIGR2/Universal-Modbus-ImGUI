@@ -8,11 +8,10 @@ public:
     CommunicationManager();
     ~CommunicationManager();
 
-    void sendDataToDevice();
-    ssize_t  readDataFromDevice();
+    ssize_t sendDataToDevice();
+    ssize_t readDataFromDevice();
 
 private:
-    SerialDevice* m_pDevice;
-    char m_inputBuffer[256];
-    char m_outputBuffer[256];
+    char* m_inputBuffer = new char[255];
+    char* m_outputBuffer = new char[255];
 };
