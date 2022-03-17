@@ -39,5 +39,5 @@ private:
     bool m_clear = false;
     bool m_copy = false;
 
-    std::string m_title = "Exchange";
+    std::string m_title = "Обмен";
 };
