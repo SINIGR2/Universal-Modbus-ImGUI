@@ -16,8 +16,8 @@ ExchangeWindow::~ExchangeWindow()
 void
 ExchangeWindow::Show(bool* pOpen)
 {
-        const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
+    const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
 
     if (!ImGui::Begin(m_title.c_str(), pOpen, m_windowFlags)) {
@@ -25,19 +25,20 @@ ExchangeWindow::Show(bool* pOpen)
         return;
     }
 
-    ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
+//    ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
 
     if (ImGui::BeginMenuBar()) {
-        m_clear = ImGui::Button("Clear");
-        m_copy = ImGui::Button("Copy");
-        ImGui::Checkbox("Auto-scroll", &m_autoscroll);
+        if (ImGui::BeginMenu("Настройки")) {
+            ImGui::Checkbox("Автопрокрутка", &m_autoscroll);
+            ImGui::Separator();
+            if (ImGui::MenuItem("Очистить", NULL, false, true))
+                Clear();
+            if (ImGui::MenuItem("Копировать", NULL, false, true))
+                Copy();
+            ImGui::EndMenu();
+        }
         ImGui::EndMenuBar();
     }
-
-    if (m_clear)
-        Clear();
-    if (m_copy)
-        ImGui::LogToClipboard();
 
     ImGui::Separator();
     ImGui::BeginChild("scrolling", ImVec2(0, 0), false, ImGuiWindowFlags_HorizontalScrollbar);

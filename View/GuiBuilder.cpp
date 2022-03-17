@@ -13,6 +13,10 @@ GuiBuilder::GuiBuilder()
 
 GuiBuilder::~GuiBuilder()
 {
+    if (m_window)
+        delete m_window;
+    if (m_backupCurrentContext)
+        delete m_backupCurrentContext;
 }
 
 int
@@ -55,7 +59,7 @@ int
 GuiBuilder::createWindow()
 {
     // Create window with graphics context
-    m_window = glfwCreateWindow(1280, 720, "Universal modbus configure", NULL, NULL);
+    m_window = glfwCreateWindow(1280, 720, "Универсальный конфигуратор Modbus", NULL, NULL);
     if (m_window == NULL)
         return -1;
 
@@ -108,8 +112,8 @@ void
 GuiBuilder::loadFonts(ImGuiIO& io)
 {
     // Load Fonts
-    io.Fonts->AddFontDefault();
-    io.Fonts->AddFontFromFileTTF("C:\\_Projects\\C++\\Universal-Modbus-ImGUI\\Support\\Fonts\\LiberationMono-Regular.ttf", 18.0f);
+    //io.Fonts->AddFontDefault();
+    io.Fonts->AddFontFromFileTTF("C:\\_Projects\\C++\\Universal-Modbus-ImGUI\\Support\\Fonts\\LiberationMono-Regular.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
 }
 
 void
@@ -126,6 +130,8 @@ GuiBuilder::build()
     bool show_another_window = false;
     bool enableBackground = true;
     bool showExchange = true;
+    char* buffer_in = new char[256];
+    char* buffer_out = new char[256];
 
     m_clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -140,11 +146,19 @@ GuiBuilder::build()
         ImGui::NewFrame();
 
         BackgroundWindow::instance()->Show(&enableBackground);
-
         ExchangeWindow::instance()->Show(&showExchange);
+
+//        SerialDevice::instance().open();
+//        SerialDevice::instance().setCommunicationParams(4, B38400);
+//        ssize_t write = SerialDevice::instance().write(buffer_out, 8);
+//        ExchangeWindow::instance()->AddMessage("Sent:     ", *buffer_out);
+//        ExchangeWindow::instance()->AddMessage("\r\n");
+//        ssize_t readed = SerialDevice::instance().read(buffer_in, 36);
+//        ExchangeWindow::instance()->AddMessage("Received: ", *buffer_in);
+//        ExchangeWindow::instance()->AddMessage("\r\n");
         std::time_t result = std::time(nullptr);
         std::string msg = std::asctime(std::localtime(&result));
-        ExchangeWindow::instance()->AddMessage("[%05d] Hello, current time is %.1f'\n", ImGui::GetFrameCount(), ImGui::GetTime());
+        ExchangeWindow::instance()->AddMessage("[%05d] Время работы программы составляет:  %.1f'\n", ImGui::GetFrameCount(), ImGui::GetTime());
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)

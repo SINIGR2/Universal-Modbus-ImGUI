@@ -51,10 +51,10 @@ BackgroundWindow::Show(bool* pOpen)
     ImGui::DockSpace(m_dockspaceId, ImVec2(0.0f, 0.0f), m_dockspaceFlags);
 
     if (ImGui::BeginMenuBar()) {
-        if (ImGui::BeginMenu("Menu")) {
+        if (ImGui::BeginMenu("Меню")) {
             ImGui::Separator();
 
-            if (ImGui::MenuItem("Exit", NULL, false, pOpen != NULL))
+            if (ImGui::MenuItem("Выход", NULL, false, pOpen != NULL))
                 *pOpen = false;
             ImGui::EndMenu();
         }
