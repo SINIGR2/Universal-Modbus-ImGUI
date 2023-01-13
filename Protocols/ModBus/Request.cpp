@@ -5,7 +5,7 @@ namespace modbus {
 
 Request::Request()
     : _mode(NONE)
-    , _rtuFields_({ 0, 0, 0, 0, 0, 0, 0, 0, 0 })
+    , _rtuFields_({ 0, 0, 0, 0, 0, 0, 0, 0 })
     , _asciiFields_({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
 {
     _mode = NONE;
@@ -117,20 +117,20 @@ Request::GetErrorCheckLrc()
 int
 Request::GetTrailer()
 {
-    if (_mode == NONE)
+    if (_mode == NONE or _mode == RTU)
         return _mode;
-
-    if (_mode == RTU)
-        return _rtuFields_.trailer;
 
     return atoi(reinterpret_cast<char*>(_asciiFields_.trailer));
 }
 
 void
-Request::SetSlaveAddress(const byte* address)
+Request::SetSlaveAddress(const byte* slaveAddress)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.slaveAddress = *slaveAddress;
 }
 
 void
@@ -138,6 +138,9 @@ Request::SetFunction(const byte* function)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.function = *function;
 }
 
 void
@@ -145,6 +148,9 @@ Request::SetStartingAddressHi(const byte* startingAddressHi)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.startingAddressHi = *startingAddressHi;
 }
 
 void
@@ -152,6 +158,9 @@ Request::SetStartingAddressLow(const byte* startingAddressLow)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.startingAddressLow = *startingAddressLow;
 }
 
 void
@@ -159,6 +168,9 @@ Request::SetQuantityHi(const byte* quantityHi)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.quantityHi = *quantityHi;
 }
 
 void
@@ -166,6 +178,9 @@ Request::SetQuantityLow(const byte* quantityLow)
 {
     if (_mode == NONE)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.quantityLow = *quantityLow;
 }
 
 void
@@ -173,6 +188,9 @@ Request::SetErrorCheckHi(const byte* errorCheckHi)
 {
     if (_mode == NONE or _mode == ASCII)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.errorCheckHi = *errorCheckHi;
 }
 
 void
@@ -180,6 +198,9 @@ Request::SetErrorCheckLow(const byte* errorCheckLow)
 {
     if (_mode == NONE or _mode == ASCII)
         return;
+
+    if (_mode == RTU)
+        _rtuFields_.errorCheckLow = *errorCheckLow;
 }
 
 void
@@ -192,7 +213,7 @@ Request::SetErrorCheckLrc(const byte* errorCheckLrc)
 void
 Request::SetTrailer(const byte* trailer)
 {
-    if (_mode == NONE)
+    if (_mode == NONE or _mode == RTU)
         return;
 }
 

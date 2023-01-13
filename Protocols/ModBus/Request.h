@@ -18,7 +18,7 @@ public:
     int GetErrorCheckLow();
     int GetErrorCheckLrc();
     int GetTrailer();
-    void SetSlaveAddress(const byte* address);
+    void SetSlaveAddress(const byte* slaveAddress);
     void SetFunction(const byte* function);
     void SetStartingAddressHi(const byte* startingAddressHi);
     void SetStartingAddressLow(const byte* startingAddressLow);
@@ -40,7 +40,6 @@ private:
         byte quantityLow;
         byte errorCheckHi;
         byte errorCheckLow;
-        byte trailer;
     };
 
     struct AsciiFields {
