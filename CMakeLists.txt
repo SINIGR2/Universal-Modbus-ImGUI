@@ -28,16 +28,16 @@ include_directories(pcomm/Lib/x64)
 include_directories(View)
 include_directories(Support/Fonts)
 
+include_directories(Protocols)
+
+#---Submodules
+add_subdirectory(Protocols/ModBus)
 
 #---GLFW
 add_subdirectory(glfw)
 
 #---GLEW
 add_subdirectory(glew)
-
-#if(DEFINED ENV{VCPKG_DEFAULT_TRIPLET} AND NOT DEFINED VCPKG_TARGET_TRIPLET)
-#    set(VCPKG_TARGET_TRIPLET "$ENV{VCPKG_DEFAULT_TRIPLET}" CACHE STRING "")
-#endif()
 
 #---Target
 add_executable(${PROJECT_NAME}
@@ -72,15 +72,18 @@ add_executable(${PROJECT_NAME}
         View/BackgroundWindow/BackgroundWindow.cpp
         View/BackgroundWindow/BackgroundWindow.h
         View/GuiBuilder.cpp
-        View/GuiBuilder.h)
+        View/GuiBuilder.h
+
+        Protocols/ModBus/Request.h)
 
 #---Find pckg
-find_package(OpenGL)
+find_package(OpenGL REQUIRED)
 
 #---Linked Libs
 target_link_libraries(${PROJECT_NAME}
         PUBLIC
 
+        Modbus
         glfw
         libglew_static
         OpenGL::GL
